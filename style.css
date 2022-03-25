@@ -24,3 +24,13 @@ body {
     display: flex;
     flex: 1;
 }
+
+.square {
+    padding: 0;
+    margin: 0px;
+    box-sizing: border-box;
+    border: .1px solid grey;
+    width: 6.25%;
+    height: 100%;    
+    background-color: #fff;
+}
