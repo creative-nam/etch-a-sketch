@@ -68,3 +68,13 @@ container.addEventListener('mousemove', paintSquare)
 squaresArr.forEach(square => {
     square.addEventListener('click', paintSquare)
 });
+
+function clear() {
+    squares.forEach(square => {
+        square.classList.remove('painted')
+    })
+}
+
+let clearBtn = document.querySelector('.clearBtn')
+
+clearBtn.addEventListener('click', clear)
