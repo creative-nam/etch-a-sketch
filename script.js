@@ -14,3 +14,20 @@ function createRows(amountOfRows) {
     }
 }
 
+function createSquares(amountOfSquares) {
+    let rowNum = 0
+
+    for (let i = 0; i <= amountOfSquares - 1; i++) {
+        if (i !== 0 && i % 16 === 0) rowNum++
+        
+        let row = document.querySelector(`.r-${rowNum}`)
+        let square = document.createElement('div')
+
+        square.classList.add('square')
+        
+        row.appendChild(square)
+    }
+}
+
+createRows(amountOfRows)
+createSquares(amountOfSquares)
