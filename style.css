@@ -8,6 +8,20 @@ body {
     align-items: center;
 }
 
+.outerContainer {
+    display: flex;
+    gap: 5%;
+    justify-content: space-between;
+}
+
+.options {
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+}
+
 .container {
     width: 720px;
     height: 720px;
