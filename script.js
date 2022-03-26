@@ -31,3 +31,23 @@ function createSquares(amountOfSquares) {
 
 createRows(amountOfRows)
 createSquares(amountOfSquares)
+
+/*
+The folllowing piece of code, used to detect weather mouse is
+down at any given moment was inspired by this comment on
+stackoverflow: https://stackoverflow.com/questions/322378/javascript-check-if-mouse-button-down#:~:text=This%20is%20an,the%20MouseEvent%20docs.
+by u/Jono Job
+*/
+let mouseIsDown = false
+
+function isMouseDown(e) {
+    //works if one, or all of the main buttons - right, left, and
+    // middle (usually the wheel), are clicked/pressed (ie, simultaneasly)
+    if (e.buttons >= 1 && e.buttons < 8) {
+        mouseIsDown = true
+    }
+}
+
+document.addEventListener("mousedown", isMouseDown)
+document.addEventListener("mousemove", isMouseDown)
+window.addEventListener("mouseup", () => mouseIsDown = false)
