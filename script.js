@@ -42,7 +42,8 @@ let mouseIsDown = false
 
 function isMouseDown(e) {
     //works if one, or all of the main buttons - right, left, and
-    // middle (usually the wheel), are clicked/pressed (ie, simultaneasly)
+    // middle (usually the wheel), are clicked/pressed (ie, simultaneously)
+    // for more info, read about (mouse events)[https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons]
     if (e.buttons >= 1 && e.buttons < 8) {
         mouseIsDown = true
     }
@@ -51,3 +52,19 @@ function isMouseDown(e) {
 document.addEventListener("mousedown", isMouseDown)
 document.addEventListener("mousemove", isMouseDown)
 window.addEventListener("mouseup", () => mouseIsDown = false)
+
+let container = document.querySelector('.container')
+let squares = document.querySelectorAll('.square')
+let squaresArr = Array.from(squares)
+
+function paintSquare(e) {
+    if (e.type === 'click' || mouseIsDown && squaresArr.includes(e.target)) {
+        e.target.classList.add('painted')
+    }
+}
+
+container.addEventListener('mousemove', paintSquare)
+
+squaresArr.forEach(square => {
+    square.addEventListener('click', paintSquare)
+});
