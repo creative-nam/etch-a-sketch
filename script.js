@@ -1,4 +1,5 @@
 let amountOfRows = 16
+let squares, squaresArr
 
 function createRows(amountOfRows) {
     let container = document.querySelector('.container')
@@ -30,8 +31,15 @@ function createSquares(amountOfSquares) {
     }
 }
 
-createRows(amountOfRows)
-createSquares(amountOfRows ** 2)
+function createGrid(amountOfRows = amountOfRows) {
+    createRows(amountOfRows)
+    createSquares(amountOfRows ** 2)
+
+    squares = document.querySelectorAll('.square')
+    squaresArr = Array.from(squares)
+}
+
+createGrid(amountOfRows)
 
 /*
 The folllowing piece of code, used to detect weather mouse is
@@ -55,8 +63,6 @@ document.addEventListener("mousemove", isMouseDown)
 window.addEventListener("mouseup", () => mouseIsDown = false)
 
 let container = document.querySelector('.container')
-let squares = document.querySelectorAll('.square')
-let squaresArr = Array.from(squares)
 
 function paintSquare(e) {
     if (e.type === 'click' || mouseIsDown && squaresArr.includes(e.target)) {
@@ -80,6 +86,31 @@ function toggleEraser() {
     (isEraserOn())? eraserBtn.classList.remove('on') :
         eraserBtn.classList.add('on')
 }
+
+function displayGridSize(e) {
+    let size = e.target.value
+    gridSize.textContent = `${size} x ${size}`
+}
+
+function removePreviousContent() {
+    let container = document.querySelector('.container')
+
+    container.innerHTML = ''
+}
+
+function updateAmountofRows(e) {
+    amountOfRows = e.target.value
+
+    removePreviousContent()
+
+    createGrid(amountOfRows)
+}
+
+let rangeElem = document.querySelector('#rangeInput')
+let gridSize = document.querySelector('.gridSize')
+
+rangeElem.addEventListener('input', displayGridSize)
+rangeElem.addEventListener('change', updateAmountofRows)
 
 container.addEventListener('mousemove', (e) => {
     (isEraserOn())? erase(e) : paintSquare(e)
