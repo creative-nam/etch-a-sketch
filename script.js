@@ -63,10 +63,31 @@ function paintSquare(e) {
     }
 }
 
-container.addEventListener('mousemove', paintSquare)
+function erase(e) {
+    if (e.type === 'click' || mouseIsDown && squaresArr.includes(e.target)) {
+        e.target.classList.remove('painted')
+    }
+}
+
+let eraserBtn = document.querySelector('.eraserBtn')
+
+function isEraserOn() {
+    return (Array.from(eraserBtn.classList).includes('on'))
+}
+
+function toggleEraser() {
+    (isEraserOn())? eraserBtn.classList.remove('on') :
+        eraserBtn.classList.add('on')
+}
+
+container.addEventListener('mousemove', (e) => {
+    (isEraserOn())? erase(e) : paintSquare(e)
+})
 
 squaresArr.forEach(square => {
-    square.addEventListener('click', paintSquare)
+    square.addEventListener('click', (e) => {
+        (isEraserOn())? erase(e) : paintSquare(e)
+    })
 });
 
 function clear() {
@@ -78,3 +99,5 @@ function clear() {
 let clearBtn = document.querySelector('.clearBtn')
 
 clearBtn.addEventListener('click', clear)
+
+eraserBtn.addEventListener('click', toggleEraser)
