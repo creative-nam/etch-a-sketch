@@ -78,13 +78,22 @@ function erase(e) {
 
 let eraserBtn = document.querySelector('.eraserBtn')
 
-function isEraserOn() {
-    return (Array.from(eraserBtn.classList).includes('on'))
+function isBtnOn(btn) {
+    return (btn.classList.contains('on'))
 }
 
-function toggleEraser() {
-    (isEraserOn())? eraserBtn.classList.remove('on') :
-        eraserBtn.classList.add('on')
+function toggleBtn(e) {
+    
+    let btn = (e.nodeName !== 'BUTTON')? e.target : e
+    
+    (isBtnOn(btn))? btn.target.classList.remove('on') :
+        btn.classList.add('on')
+
+    similarBtns = document.querySelectorAll('.g1')
+
+    similarBtns.forEach(btn => {
+        if (isBtnOn(btn)) btn.classList.remove('on')
+    })
 }
 
 function displayGridSize(e) {
@@ -113,12 +122,12 @@ rangeElem.addEventListener('input', displayGridSize)
 rangeElem.addEventListener('change', updateAmountofRows)
 
 container.addEventListener('mousemove', (e) => {
-    (isEraserOn())? erase(e) : paintSquare(e)
+    (isBtnOn(eraserBtn))? erase(e) : paintSquare(e)
 })
 
 squaresArr.forEach(square => {
     square.addEventListener('click', (e) => {
-        (isEraserOn())? erase(e) : paintSquare(e)
+        (isBtnOn(eraserBtn))? erase(e) : paintSquare(e)
     })
 });
 
@@ -132,4 +141,4 @@ let clearBtn = document.querySelector('.clearBtn')
 
 clearBtn.addEventListener('click', clear)
 
-eraserBtn.addEventListener('click', toggleEraser)
+eraserBtn.addEventListener('click', toggleBtn)
