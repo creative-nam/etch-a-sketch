@@ -1,5 +1,4 @@
 let amountOfRows = 16
-let amountOfSquares = 256
 
 function createRows(amountOfRows) {
     let container = document.querySelector('.container')
@@ -8,7 +7,8 @@ function createRows(amountOfRows) {
         let row = document.createElement('div')
 
         row.classList.add('row')        
-        row.classList.add(`r-${i}`)        
+        row.classList.add(`r-${i}`)
+        row.style.height = 1 / amountOfRows
         
         container.appendChild(row)
     }
@@ -18,19 +18,20 @@ function createSquares(amountOfSquares) {
     let rowNum = 0
 
     for (let i = 0; i <= amountOfSquares - 1; i++) {
-        if (i !== 0 && i % 16 === 0) rowNum++
+        if (i !== 0 && i % amountOfRows === 0) rowNum++
         
         let row = document.querySelector(`.r-${rowNum}`)
         let square = document.createElement('div')
 
         square.classList.add('square')
+        square.style.width = 1 / (amountOfRows ** 2)
         
         row.appendChild(square)
     }
 }
 
 createRows(amountOfRows)
-createSquares(amountOfSquares)
+createSquares(amountOfRows ** 2)
 
 /*
 The folllowing piece of code, used to detect weather mouse is
