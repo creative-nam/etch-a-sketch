@@ -82,18 +82,27 @@ function isBtnOn(btn) {
     return (btn.classList.contains('on'))
 }
 
-function toggleBtn(e) {
+function turnOffOtherBtns(exception) {
+    let AllBtns = document.querySelectorAll('.g1')
+
+    for (let currentBtn of AllBtns) {
+        if (currentBtn === exception) continue
+        
+        currentBtn.classList.remove('on')
+    }
+}
+
+function toggleBtn(arg) {
     
-    let btn = (e.nodeName !== 'BUTTON')? e.target : e
+    //The argument might be an event, or it might
+    //be a button.
+    //Note: DO NOT REMOVE THE SEMICOLON!!! Javascript is weird...
+    let btn = (arg.tagName === 'BUTTON')? e : arg.target;
     
-    (isBtnOn(btn))? btn.target.classList.remove('on') :
+    (isBtnOn(btn))? btn.classList.remove('on') :
         btn.classList.add('on')
 
-    similarBtns = document.querySelectorAll('.g1')
-
-    similarBtns.forEach(btn => {
-        if (isBtnOn(btn)) btn.classList.remove('on')
-    })
+   turnOffOtherBtns(btn)    
 }
 
 function displayGridSize(e) {
