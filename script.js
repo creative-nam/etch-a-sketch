@@ -67,17 +67,23 @@ let container = document.querySelector('.container')
 function paintSquare(e) {
     if (e.type === 'click' || mouseIsDown && squaresArr.includes(e.target)) {
         if (isBtnOn(rainbowBtn)) {
+            erase(e)
             e.target.classList.add('paintedRainbow')
             e.target.style.backgroundColor = `hsl(${(parseInt(Math.random() * 357) + 1)}, 80%, 50%)`
         }
 
-        e.target.classList.add('painted')
+        else {
+            erase(e)
+            e.target.classList.add('painted')
+        }
     }
 }
 
 function erase(e) {
     if (e.type === 'click' || mouseIsDown && squaresArr.includes(e.target)) {
         e.target.classList.remove('painted')
+        e.target.classList.remove('paintedRainbow')
+        e.target.style.backgroundColor = ''
     }
 }
 
@@ -148,6 +154,8 @@ squaresArr.forEach(square => {
 function clear() {
     squares.forEach(square => {
         square.classList.remove('painted')
+        square.classList.remove('paintedrainbow')
+        square.style.backgroundColor = '#fff'
     })
 }
 
