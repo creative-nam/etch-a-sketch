@@ -66,6 +66,11 @@ let container = document.querySelector('.container')
 
 function paintSquare(e) {
     if (e.type === 'click' || mouseIsDown && squaresArr.includes(e.target)) {
+        if (isBtnOn(rainbowBtn)) {
+            e.target.classList.add('paintedRainbow')
+            e.target.style.backgroundColor = `hsl(${(parseInt(Math.random() * 357) + 1)}, 80%, 50%)`
+        }
+
         e.target.classList.add('painted')
     }
 }
@@ -151,3 +156,7 @@ let clearBtn = document.querySelector('.clearBtn')
 clearBtn.addEventListener('click', clear)
 
 eraserBtn.addEventListener('click', toggleBtn)
+
+let rainbowBtn = document.querySelector('.rainbowBtn')
+
+rainbowBtn.addEventListener('click', toggleBtn)
