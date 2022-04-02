@@ -148,6 +148,23 @@ function erase(e) {
     }
 }
 
+function togglegridLines(e) {
+    toggleBtn(e)
+    
+    if (isBtnOn(gridLinesBtn)) {
+        squares.forEach(square => {
+            square.style.borderRight = '.1px solid grey'
+            square.style.borderBottom = '.1px solid grey'
+        })
+    }
+
+    else {
+        squares.forEach(square => {
+            square.style.border = '0'
+        }) 
+    }    
+}
+
 let eraserBtn = document.querySelector('.eraserBtn')
 
 function isBtnOn(btn) {
@@ -235,3 +252,6 @@ darkenBtn.addEventListener('click', toggleBtn)
 
 let lightenBtn = document.querySelector('.lightenBtn')
 lightenBtn.addEventListener('click', toggleBtn)
+
+let gridLinesBtn = document.querySelector('.gridLinesBtn')
+gridLinesBtn.addEventListener('click', togglegridLines)
