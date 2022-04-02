@@ -64,6 +64,51 @@ window.addEventListener("mouseup", () => mouseIsDown = false)
 
 let container = document.querySelector('.container')
 
+function getRgbVals(str) {
+    let i = 0
+    let arr = ['', '', '']
+
+    for (const letter of str) {
+        if (!isNaN(letter)) arr[i] += letter
+
+        else if (letter === ',') i++
+        
+        else if (letter === ' ') continue
+    }
+
+    return arr
+}
+
+/*
+This piece of code, used to convert RGB colors to HSL was taken/inpired
+by a comment on a stackoverflow thread by users u/defend orca
+and u/azametzin
+
+link to the comment: https://stackoverflow.com/questions/2348597/why-doesnt-this-javascript-rgb-to-hsl-code-work/54071699#:~:text=You%20have%20to%20change,60%2Cs%2Cl%2Ca%7D%3B%0A%7D
+*/
+
+function convertRgbToHsl(r, g, b) {
+    r /= 255, g /= 255, b /= 255;
+    let max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+
+    if (max == min) {
+        h = s = 0; // achromatic
+    }
+
+    else {
+        let d = max - min;
+        s = (l > 0.5)? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+            case r: h = (g -b) / d + ((g < b)? 6 : 0); break;
+            case g: h = ( b -r) / d + 2; break;
+            case b: h = (r -g) / d + 4; break;
+        }
+    }
+
+    return [h * 60, s * 100, l * 100];
+}
+
 function paintSquare(e) {
     if (e.type === 'click' || mouseIsDown && squaresArr.includes(e.target)) {
         if (isBtnOn(rainbowBtn)) {
