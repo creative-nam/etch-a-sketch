@@ -109,17 +109,33 @@ function convertRgbToHsl(r, g, b) {
     return [h * 60, s * 100, l * 100];
 }
 
+function darkenOrLighten(val) {
+    return (isBtnOn(darkenBtn))? val - 5 : val + 5
+}
+
 function paintSquare(e) {
     if (e.type === 'click' || mouseIsDown && squaresArr.includes(e.target)) {
+        let square = e.target
+        
         if (isBtnOn(rainbowBtn)) {
             erase(e)
-            e.target.classList.add('paintedRainbow')
-            e.target.style.backgroundColor = `hsl(${(parseInt(Math.random() * 357) + 1)}, 80%, 50%)`
+            square.classList.add('paintedRainbow')
+            square.style.backgroundColor = `hsl(${(parseInt(Math.random() * 357) + 1)}, 80%, 50%)`
+        }
+
+        else if (isBtnOn(darkenBtn) || isBtnOn(lightenBtn)) {
+            //slice the string form the 4th element (the elem immediately after the first parenthesis),
+            //to the end (the last parenthesis), with the last elem not included
+            let bgColor = window.getComputedStyle(square).backgroundColor.slice(4, -1)
+            let bgColorRgb = getRgbVals(bgColor)
+            let hsl = convertRgbToHsl(bgColorRgb[0], bgColorRgb[1], bgColorRgb[2])
+
+            square.style.backgroundColor = `hsl(${hsl[0]}, ${hsl[1]}%, ${darkenOrLighten(hsl[2])}%)`         
         }
 
         else {
             erase(e)
-            e.target.classList.add('painted')
+            square.classList.add('painted')
         }
     }
 }
@@ -213,3 +229,9 @@ eraserBtn.addEventListener('click', toggleBtn)
 let rainbowBtn = document.querySelector('.rainbowBtn')
 
 rainbowBtn.addEventListener('click', toggleBtn)
+
+let darkenBtn = document.querySelector('.darkenBtn')
+darkenBtn.addEventListener('click', toggleBtn)
+
+let lightenBtn = document.querySelector('.lightenBtn')
+lightenBtn.addEventListener('click', toggleBtn)
