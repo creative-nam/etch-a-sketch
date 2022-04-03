@@ -26,6 +26,14 @@ function createSquares(amountOfSquares) {
 
         square.classList.add('square')
         square.style.width = 1 / (amountOfRows ** 2)
+
+        square.addEventListener('mouseenter', (e) => {
+            (isBtnOn(eraserBtn))? erase(e) : paintSquare(e)
+        });
+
+        square.addEventListener('click', (e) => {
+            (isBtnOn(eraserBtn))? erase(e) : paintSquare(e)
+        })
         
         row.appendChild(square)
     }
@@ -218,16 +226,6 @@ let gridSize = document.querySelector('.gridSize')
 
 rangeElem.addEventListener('input', displayGridSize)
 rangeElem.addEventListener('change', updateAmountofRows)
-
-container.addEventListener('mousemove', (e) => {
-    (isBtnOn(eraserBtn))? erase(e) : paintSquare(e)
-})
-
-squaresArr.forEach(square => {
-    square.addEventListener('click', (e) => {
-        (isBtnOn(eraserBtn))? erase(e) : paintSquare(e)
-    })
-});
 
 function clear() {
     squares.forEach(square => {
