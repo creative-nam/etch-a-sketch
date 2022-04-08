@@ -1,9 +1,8 @@
 let amountOfRows = 16
 let squares, squaresArr
+let container = document.querySelector('.container')
 
 function createRows(amountOfRows) {
-    let container = document.querySelector('.container')
-
     for (let i = 0; i < amountOfRows; i++) {
         let row = document.createElement('div')
 
@@ -69,8 +68,6 @@ function isMouseDown(e) {
 document.addEventListener("mousedown", isMouseDown)
 document.addEventListener("mousemove", isMouseDown)
 window.addEventListener("mouseup", () => mouseIsDown = false)
-
-let container = document.querySelector('.container')
 
 function getRgbVals(str) {
     let i = 0
@@ -208,8 +205,6 @@ function displayGridSize(e) {
 }
 
 function removePreviousContent() {
-    let container = document.querySelector('.container')
-
     container.innerHTML = ''
 }
 
