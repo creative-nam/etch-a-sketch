@@ -170,8 +170,6 @@ function togglegridLines(e) {
     }    
 }
 
-let eraserBtn = document.querySelector('.eraserBtn')
-
 function isBtnOn(btn) {
     return (btn.classList.contains('on'))
 }
@@ -216,12 +214,6 @@ function updateAmountofRows(e) {
     createGrid(amountOfRows)
 }
 
-let rangeElem = document.querySelector('#rangeInput')
-let gridSize = document.querySelector('.gridSize')
-
-rangeElem.addEventListener('input', displayGridSize)
-rangeElem.addEventListener('change', updateAmountofRows)
-
 function clear() {
     squares.forEach(square => {
         square.classList.remove('painted')
@@ -230,14 +222,18 @@ function clear() {
     })
 }
 
-let clearBtn = document.querySelector('.clearBtn')
+let rangeElem = document.querySelector('#rangeInput')
+let gridSize = document.querySelector('.gridSize')
+rangeElem.addEventListener('input', displayGridSize)
+rangeElem.addEventListener('change', updateAmountofRows)
 
+let clearBtn = document.querySelector('.clearBtn')
 clearBtn.addEventListener('click', clear)
 
+let eraserBtn = document.querySelector('.eraserBtn')
 eraserBtn.addEventListener('click', toggleBtn)
 
 let rainbowBtn = document.querySelector('.rainbowBtn')
-
 rainbowBtn.addEventListener('click', toggleBtn)
 
 let darkenBtn = document.querySelector('.darkenBtn')
