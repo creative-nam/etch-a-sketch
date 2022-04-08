@@ -24,6 +24,7 @@ function createSquares(amountOfSquares) {
         let square = document.createElement('div')
 
         square.classList.add('square')
+        square.classList.add('border')
         square.style.width = 1 / (amountOfRows ** 2)
 
         square.addEventListener('mouseenter', (e) => {
@@ -158,14 +159,13 @@ function togglegridLines(e) {
     
     if (isBtnOn(gridLinesBtn)) {
         squares.forEach(square => {
-            square.style.borderRight = '.1px solid grey'
-            square.style.borderBottom = '.1px solid grey'
+            square.classList.add('border')
         })
     }
 
     else {
         squares.forEach(square => {
-            square.style.border = '0'
+            square.classList.remove('border')
         }) 
     }    
 }
@@ -184,8 +184,7 @@ function turnOffOtherBtns(exception) {
     }
 }
 
-function toggleBtn(arg) {
-    
+function toggleBtn(arg) {    
     //The argument might be an event, or it might
     //be a button.
     //Note: DO NOT REMOVE THE SEMICOLON!!! Javascript is weird...

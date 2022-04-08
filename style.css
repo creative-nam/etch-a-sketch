@@ -48,12 +48,15 @@ body {
     padding: 0;
     margin: 0px;
     box-sizing: border-box;
-    border-right: .1px solid grey;
-    border-bottom: .1px solid grey;
     width: 6.25%;
     height: 100%;    
     background-color: #fff;
     flex: 1;
+}
+
+.border {
+    border-right: .1px solid grey;
+    border-bottom: .1px solid grey;
 }
 
 .painted {
